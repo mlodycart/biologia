@@ -64,7 +64,6 @@
             overflow: hidden;
         }
         
-        /* Tabela z automatycznym dopasowaniem i zakazem przewijania w bok */
         table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
         th, td { padding: 10px 10px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.06); word-wrap: break-word; overflow-wrap: break-word; }
         th { background: rgba(0, 0, 0, 0.4); font-weight: 700; font-size: 14px; border-bottom: 2px solid rgba(255, 255, 255, 0.1); color: #00e5ff; letter-spacing: 0.5px; }
@@ -74,6 +73,13 @@
         tr.highlighted-row { background: rgba(0, 229, 255, 0.15) !important; color: #fff !important; font-weight: bold; }
         tr.highlighted-row td { color: #fff !important; }
         tr.highlighted-row strong { color: #00e5ff !important; }
+
+        /* KLUCZOWY STYL: Podświetlenie nawiasu na niebiesko/błękitno */
+        .sub-desc {
+            color: #00e5ff !important;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
 
         @media(max-width: 900px) { 
             .nav-links { display: none; } 
@@ -110,8 +116,8 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 32%;">Zagadnienie</th>
-                        <th style="width: 68%;">Definicja</th>
+                        <th style="width: 38%;">Zagadnienie</th>
+                        <th style="width: 62%;">Definicja</th>
                     </tr>
                 </thead>
                 <tbody id="table-body"></tbody>
@@ -122,12 +128,22 @@
     <script src="historyData.js"></script>
     <script>
         function buildTable() {
-            document.getElementById('table-body').innerHTML = historyData.map((w, idx) => `
-                <tr id="row-word-${idx}">
-                    <td><strong>${w.title}</strong></td>
-                    <td>${w.desc}</td>
-                </tr>
-            `).join('');
+            document.getElementById('table-body').innerHTML = historyData.map((w, idx) => {
+                let mainText = w.title;
+                let bracketText = "";
+                const bracketIdx = w.title.indexOf('(');
+                if (bracketIdx !== -1) {
+                    mainText = w.title.substring(0, bracketIdx).trim();
+                    bracketText = w.title.substring(bracketIdx);
+                }
+
+                return `
+                    <tr id="row-word-${idx}">
+                        <td><strong>${mainText}</strong> ${bracketText ? `<span class="sub-desc">${bracketText}</span>` : ''}</td>
+                        <td>${w.desc}</td>
+                    </tr>
+                `;
+            }).join('');
         }
 
         function toggleClearButton() {
