@@ -167,21 +167,38 @@
 
     <script src="historyData.js"></script>
     <script>
+        // INTELIGENTNA FUNKCJA SPRAWDZAJĄCA (Analizuje sens, ignoruje kolejność słów i błędy)
         function evaluateAnswer(userStr, targetDesc) {
             const cleanUser = userStr.toLowerCase().trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
             const cleanTarget = targetDesc.toLowerCase().trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+            
             if (!cleanUser) return { percentage: 0, matched: [], missing: [targetDesc] };
             if (cleanUser === cleanTarget) return { percentage: 100, matched: [targetDesc], missing: [] };
 
-            const userWords = cleanUser.split(/\s+/).filter(w => w.length > 0);
-            const targetWords = cleanTarget.split(/\s+/).filter(w => w.length > 0);
-            if (targetWords.length === 1) return { percentage: 0, matched: [], missing: [targetDesc] };
+            // Rozbijamy na pojedyncze słowa i odrzucamy krótkie spójniki (np. "i", "w", "o", "do")
+            const userWords = cleanUser.split(/\s+/).filter(w => w.length > 2);
+            const targetWords = cleanTarget.split(/\s+/).filter(w => w.length > 2);
+            
+            if (targetWords.length === 0) return { percentage: 100, matched: [targetDesc], missing: [] };
 
             let matchedCount = 0;
-            targetWords.forEach(tw => { if (userWords.includes(tw)) matchedCount++; });
+            targetWords.forEach(tw => {
+                if (userWords.some(uw => uw.includes(tw) || tw.includes(uw))) {
+                    matchedCount++;
+                }
+            });
+
+            // Wyliczamy procent trafionych kluczowych słów
             let percentage = Math.round((matchedCount / targetWords.length) * 100);
-            if (percentage < 30) return { percentage: 0, matched: [], missing: [targetDesc] };
-            return { percentage, matched: [targetDesc], missing: [] };
+            if (percentage > 100) percentage = 100;
+
+            // INTELIGENTNY PROG: Jeśli użytkownik trafił chociaż 35% ważnych słów (w dowolnej kolejności), 
+            // algorytm uznaje to za pełny sukces (100% i zielony kolor) i zalicza odpowiedź!
+            if (percentage >= 35 || matchedCount >= 2) {
+                return { percentage: 100, matched: [targetDesc], missing: [] };
+            }
+
+            return { percentage: percentage < 10 ? 0 : percentage, matched: [], missing: [targetDesc] };
         }
 
         function getScoreColor(percent) {
@@ -255,13 +272,13 @@
             let statusText = "";
             if (evalRes.percentage >= 75) {
                 inp.style.borderColor = "#4CAF50";
-                statusText = `<span class='correct'>Świetnie! Dopasowanie: ${evalRes.percentage}% 🎉</span>`;
+                statusText = `<span class='correct'>Dobrze! 🎉</span>`;
             } else if (evalRes.percentage >= 30) {
                 inp.style.borderColor = "#ffd700";
-                statusText = `<span class='partial-correct'>Dobrze, ale brakuje szczegółów! Dopasowanie: ${evalRes.percentage}% ⚠</span>`;
+                statusText = `<span class='partial-correct'>Dobrze, ale brakuje szczegółów! ⚠</span>`;
             } else {
                 inp.style.borderColor = "#f44336";
-                statusText = `<span class='incorrect'>Źle! Dopasowanie: ${evalRes.percentage}% ❌</span>`;
+                statusText = `<span class='incorrect'>Źle! ❌</span>`;
             }
 
             feedbackEl.innerHTML = `
