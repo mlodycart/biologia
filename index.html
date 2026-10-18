@@ -24,10 +24,10 @@
             justify-content: space-between;
             align-items: center;
             overflow-x: hidden;
+            max-width: 100vw;
             position: relative;
         }
 
-        /* Tło w delikatną siatkę */
         body::before {
             content: "";
             position: absolute;
@@ -40,13 +40,13 @@
             z-index: 0;
         }
 
-        /* Subtelne światło w tle */
         .glow {
             position: absolute;
             top: 25%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 600px;
+            width: 100%;
+            max-width: 600px;
             height: 300px;
             background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, rgba(76, 175, 80, 0.05) 50%, transparent 80%);
             filter: blur(80px);
@@ -54,21 +54,20 @@
             z-index: 0;
         }
 
-        /* Górne menu nawigacyjne */
         header {
             position: relative;
             z-index: 10;
             width: 100%;
             display: flex;
             justify-content: center;
-            padding: 24px 20px;
+            padding: 20px 15px;
         }
 
         .nav-capsule {
             background: rgba(18, 22, 26, 0.75);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px 24px;
+            padding: 10px 20px;
             border-radius: 999px;
             display: flex;
             align-items: center;
@@ -81,23 +80,23 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             color: #fff;
             text-decoration: none;
         }
 
         .brand-icon {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             background: #00e5ff;
             border-radius: 50%;
-            box-shadow: 0 0 12px #00e5ff;
+            box-shadow: 0 0 10px #00e5ff;
         }
 
         .nav-links {
             display: flex;
-            gap: 22px;
+            gap: 18px;
             list-style: none;
         }
 
@@ -117,9 +116,9 @@
             background: rgba(0, 229, 255, 0.1);
             color: #00e5ff;
             border: 1px solid rgba(0, 229, 255, 0.3);
-            padding: 8px 18px;
+            padding: 6px 16px;
             border-radius: 999px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.2s;
@@ -131,17 +130,16 @@
             box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
         }
 
-        /* Główna sekcja HERO */
         main {
             position: relative;
             z-index: 10;
             width: 100%;
             max-width: 1100px;
-            padding: 40px 20px 60px 20px;
+            padding: 20px 15px 40px 15px;
             margin: auto 0;
             display: grid;
             grid-template-columns: 1.1fr 1fr;
-            gap: 50px;
+            gap: 40px;
             align-items: center;
         }
 
@@ -150,10 +148,10 @@
         }
 
         .hero-title {
-            font-size: 52px;
+            font-size: 42px;
             font-weight: 700;
             line-height: 1.1;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             letter-spacing: -1px;
         }
 
@@ -166,31 +164,31 @@
 
         .hero-desc {
             color: #9aa0a6;
-            font-size: 18px;
+            font-size: 16px;
             line-height: 1.6;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             max-width: 480px;
         }
 
         .action-buttons {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
         }
 
         .btn-primary {
             background: rgba(0, 229, 255, 0.12);
             color: #00e5ff;
             border: 1px solid rgba(0, 229, 255, 0.4);
-            padding: 14px 28px;
+            padding: 12px 24px;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             transition: all 0.3s;
         }
 
@@ -205,14 +203,14 @@
             background: rgba(255, 255, 255, 0.04);
             color: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 14px 28px;
+            padding: 12px 24px;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             transition: all 0.3s;
         }
 
@@ -227,7 +225,7 @@
             align-items: center;
             gap: 10px;
             color: #6c757d;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             letter-spacing: 0.5px;
         }
@@ -240,28 +238,26 @@
             box-shadow: 0 0 8px #4caf50;
         }
 
-        /* Prawa sekcja – Układ 3 kart w prostokąt */
         .hero-right {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 14px;
         }
 
         .feature-card {
             background: rgba(18, 22, 26, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            padding: 24px 20px;
+            padding: 20px 18px;
             text-align: left;
             text-decoration: none;
             color: #fff;
             transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
-        /* Tabela pojęć rozciągnięta na całą szerokość */
         .feature-card.full-width {
             grid-column: span 2;
             background: rgba(24, 30, 36, 0.7);
@@ -276,8 +272,8 @@
         }
 
         .feature-icon {
-            width: 42px;
-            height: 42px;
+            width: 38px;
+            height: 38px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 10px;
@@ -294,7 +290,7 @@
         }
 
         .feature-title {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
         }
 
@@ -304,25 +300,20 @@
             line-height: 1.4;
         }
 
-        /* RWD dla urządzeń mobilnych */
         @media (max-width: 900px) {
             main {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 30px;
             }
-            
             .hero-left {
                 text-align: center;
             }
-
             .hero-desc {
-                margin: 0 auto 30px auto;
+                margin: 0 auto 25px auto;
             }
-
             .action-buttons, .badge-info {
                 justify-content: center;
             }
-
             .nav-links {
                 display: none;
             }
@@ -333,7 +324,6 @@
 
     <div class="glow"></div>
 
-    <!-- Pasek Nawigacji z pełnymi linkami -->
     <header>
         <nav class="nav-capsule">
             <a href="index.html" class="brand">
@@ -343,7 +333,6 @@
 
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Strona główna</a></li>
-                <li><a href="tabelka.html">Tabelka</a></li>
                 <li><a href="quiz_wpisywany.html">Quiz Wpisz</a></li>
                 <li><a href="quiz_abcd.html">Quiz ABCD</a></li>
             </ul>
@@ -352,9 +341,7 @@
         </nav>
     </header>
 
-    <!-- Główna treść -->
     <main>
-        <!-- Lewa sekcja Hero -->
         <section class="hero-left">
             <h1 class="hero-title">
                 Najlepsza nauka
@@ -367,7 +354,7 @@
 
             <div class="action-buttons">
                 <a href="quiz_wpisywany.html" class="btn-primary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
                     Rozpocznij Quiz
                 </a>
                 <a href="tabelka.html" class="btn-secondary">
@@ -381,11 +368,10 @@
             </div>
         </section>
 
-        <!-- Prawa sekcja – Układ 3 kart w prostokąt (bez szybkiej powtórki) -->
         <section class="hero-right">
             <a href="quiz_wpisywany.html" class="feature-card">
                 <div class="feature-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                 </div>
                 <div class="feature-title">Quiz: Wpisywanie</div>
                 <div class="feature-desc">Wpisz poprawną definicję na podstawie wygenerowanego pojęcia.</div>
@@ -393,7 +379,7 @@
 
             <a href="quiz_abcd.html" class="feature-card">
                 <div class="feature-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                 </div>
                 <div class="feature-title">Quiz: Wybór ABCD</div>
                 <div class="feature-desc">Sprawdź swoją wiedzę wybierając 1 z 3 pasujących definicji.</div>
@@ -401,7 +387,7 @@
 
             <a href="tabelka.html" class="feature-card full-width">
                 <div class="feature-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
                 </div>
                 <div class="feature-title">Tabela Pojęć</div>
                 <div class="feature-desc">Szybka wyszukiwarka i pełne spoisko wszystkich haseł z genetyki. Sprawdź całą bazę wiedzy.</div>
