@@ -41,7 +41,6 @@
 
         .tab-content { position: relative; z-index: 10; display: block; width: 100%; max-width: 1350px; padding: 10px 15px 60px 15px; }
         
-        /* Naprawiono błąd rozjeżdżania się przycisków na telefonach przez flex-wrap i odpowiednie dostosowanie paddingów */
         .table-header-bar { 
             position: sticky; top: 15px; z-index: 1000; display: flex; justify-content: space-between; align-items: center; gap: 15px; 
             margin-bottom: 20px; background: rgba(18, 22, 26, 0.9); backdrop-filter: blur(12px); padding: 15px 20px; 
@@ -67,13 +66,22 @@
             position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #00e5ff; cursor: pointer; display: none; align-items: center; justify-content: center; padding: 4px; font-size: 20px; font-weight: 700;
         }
         
-        /* Kontener tabeli dopasowujący się idealnie do wysokości danych bez zbędnych pustych przestrzeni na dole */
-        .table-responsive { width: 100%; overflow-x: auto; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(18, 22, 26, 0.8); backdrop-filter: blur(12px); }
-        #table-zoom-wrapper { transform-origin: top left; transition: transform 0.1s ease-out; width: 100%; display: inline-block; }
+        /* Czysta ramka tabeli dopasowująca wysokość do zawartości bez pustego miejsca i bez bocznych luk */
+        .table-responsive { 
+            width: 100%; 
+            overflow-x: auto; 
+            border-radius: 14px; 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            background: rgba(18, 22, 26, 0.8); 
+            backdrop-filter: blur(12px);
+        }
         
-        table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 550px; table-layout: fixed; }
+        #table-zoom-wrapper { width: 100%; }
+        
+        table { width: 100%; border-collapse: collapse; font-size: 15px; table-layout: fixed; }
         th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.06); word-wrap: break-word; }
-        th { background: rgba(0, 0, 0, 0.4); font-weight: 700; font-size: 16px; border-bottom: 2px solid rgba(255, 255, 255, 0.1); color: #00e5ff; letter-spacing: 0.5px; }
+        th { background: rgba(0, 0, 0, 0.4); font-weight: 700; font-size: 1.05em; border-bottom: 2px solid rgba(255, 255, 255, 0.1); color: #00e5ff; letter-spacing: 0.5px; }
+        tr:last-child td { border-bottom: none; }
         tr:nth-child(even) { background: rgba(255, 255, 255, 0.015); }
         tr:hover td { background: rgba(255, 255, 255, 0.03); }
         tr.highlighted-row { background: rgba(0, 229, 255, 0.15) !important; color: #fff !important; font-weight: bold; }
@@ -189,13 +197,13 @@
             const wrapper = document.getElementById('table-zoom-wrapper');
             const zoomText = document.getElementById('zoom-level-text');
             if (wrapper && zoomText) {
-                wrapper.style.transform = `scale(${currentZoom})`;
-                wrapper.style.width = `${100 / currentZoom}%`;
+                // Skalowanie wielkością czcionki zapobiega rozciąganiu układu i sztucznemu przesuwaniu
+                wrapper.style.fontSize = `${15 * currentZoom}px`;
                 zoomText.innerText = `${Math.round(currentZoom * 100)}%`;
                 localStorage.setItem('tableZoom', currentZoom);
             }
         }
-        function adjustZoom(delta) { currentZoom = Math.min(Math.max(0.4, currentZoom + delta), 1.5); updateZoomDisplay(); }
+        function adjustZoom(delta) { currentZoom = Math.min(Math.max(0.6, currentZoom + delta), 1.4); updateZoomDisplay(); }
         function resetZoom() { currentZoom = 1.0; updateZoomDisplay(); }
 
         window.onload = function() {
